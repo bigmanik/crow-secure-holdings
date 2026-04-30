@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="/src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <title>My account</title>
+</head>
+<body> 
+         
+    <header class="bg-black text-white flex items-center justify-between px-5 py-2 h-24 ">
+  <span class="mr-auto ">
+    <img src="/src/assets/crow.jpg" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-contain "></span>
+
+   <!-- Hamburger Button (mobile only) -->
+ 
+
+   <!-- Hamburger Button -->
+<button
+  id="hamburger"
+  class="md:hidden flex flex-col justify-center items-center gap-1.5 z-50 relative"
+>
+  <span class="block w-6 h-0.5 bg-white"></span>
+  <span class="block w-6 h-0.5 bg-white"></span>
+  <span class="block w-6 h-0.5 bg-white"></span>
+</button>
+
+<!-- Desktop Nav -->
+<ul class="hidden md:flex justify-center space-x-10 font-bold text-lg mr-10">
+  <li class="cursor-pointer"><a href="index.html">Home</a>  </li>
+  <li class="cursor-pointer"><a href="about.html">About</a></li>
+  <li class="cursor-pointer">Invest Now</li>
+  <li class="cursor-pointer">Contact</li>
+</ul>
+
+<!-- Overlay (click outside to close) -->
+<div
+  id="menu-overlay"
+  class="md:hidden fixed inset-0 bg-black/30 z-40
+         opacity-0 pointer-events-none transition-opacity duration-300"
+></div>
+
+<!-- Mobile Menu -->
+<ul
+  id="mobile-menu"
+  class="md:hidden fixed top-0 right-0 h-screen w-3/4 bg-black/80 backdrop-blur-sm
+         flex flex-col items-center justify-center gap-8
+         font-bold text-lg z-50
+         translate-x-full opacity-0 transition-all duration-300 ease-in-out"
+>
+  <!-- X Close Button -->
+  <button id="close-btn" class="absolute top-6 right-6 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <li class="cursor-pointer hover:text-gray-300"><a href="index.html">Home</a> </li>
+  <li class="cursor-pointer hover:text-gray-300"><a href="about.html">About</a></li>
+  <li class="cursor-pointer hover:text-gray-300">Invest Now</li>
+  <li class="cursor-pointer hover:text-gray-300">Contact</li>
+</ul>
+</header>
+<!-- login and signup body  -->
+  <section class="flex items-center justify-center"> 
+  <!-- Orbs -->
+  <div class="fixed top-[-100px] left-[-80px] w-80 h-80 rounded-full pointer-events-none z-0"
+       style="background:rgba(201,168,76,0.06); filter:blur(70px);"></div>
+  <div class="fixed bottom-[-80px] right-[-60px] w-64 h-64 rounded-full pointer-events-none z-0"
+       style="background:rgba(56,78,180,0.09); filter:blur(60px);"></div>
+ 
+  <!-- Glass Card -->
+  <div class="relative z-10 w-full max-w-sm sm:max-w-md rounded-2xl p-8 sm:p-10 "
+       style="background:rgba(255,255,255,0.06); border:1px solid rgba(201,168,76,0.2);
+              backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+              box-shadow:0 8px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);">
+ 
+    <!-- Brand -->
+    <div class="flex items-center gap-3 mb-8 ">
+     
+      <img src="/src/assets/crow.jpg" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-contain ">
+       <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">
+        Digital Asset Management Firm
+       </h3>
+        <!-- <ul class="flex flex-col gap-3 text-sm text-gray-400"> -->
+    </div>
+ 
+    <!-- Tab Switcher -->
+    <div class="relative flex gap-1 p-1 mb-7 rounded-xl"
+         style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);">
+      <div id="tabTrack" class="tab-track absolute top-1 left-1 h-[calc(100%-8px)] w-[calc(50%-4px)] rounded-lg"
+           style="background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.22);"></div>
+      <button id="tabLogin" 
+              class="relative z-10 flex-1 py-2 text-xs font-medium tracking-wide rounded-lg transition-colors duration-300 text-gold-light">
+        Sign In
+      </button>
+      <button id="tabSignup" 
+              class="relative z-10 flex-1 py-2 text-xs font-medium tracking-wide rounded-lg transition-colors duration-300"
+              style="color:rgba(255,255,255,0.45);">
+        Register
+      </button>
+    </div>
+ 
+    <!-- Titles -->
+    <div class="mb-6">
+      <div id="titleLogin">
+        <h1 class="font-display text-2xl font-light mb-1" style="color:rgba(255,255,255,0.92);">Welcome back.</h1>
+        <p class="text-xs tracking-wide" style="color:rgba(255,255,255,0.42);">Access your management dashboard</p>
+      </div>
+      <div id="titleSignup" class="hidden">
+        <h1 class="font-display text-2xl font-light mb-1" style="color:rgba(255,255,255,0.92);">Get started.</h1>
+        <p class="text-xs tracking-wide" style="color:rgba(255,255,255,0.42);">Create your account</p>
+      </div>
+    </div>
+ 
+    <!-- Forms -->
+    <div class="fields-wrapper relative" id="fieldsWrapper">
+ 
+      <!-- LOGIN -->
+      <form class="form-view flex flex-col gap-4" id="loginView">
+ 
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-medium tracking-widest uppercase" style="color:rgba(255,255,255,0.45);">Email address</label>
+          <input type="email" placeholder="you@gmail.com" id="loginEmail"
+                 class="w-full rounded-xl px-4 py-3 text-sm font-body transition-all duration-200"
+                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.92);" />
+        </div>
+ 
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-medium tracking-widest uppercase" style="color:rgba(255,255,255,0.45);">Password</label>
+          <input type="password" placeholder="••••••••••••" id="loginPassword"
+                 class="w-full rounded-xl px-4 py-3 text-sm font-body transition-all duration-200"
+                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.92);" />
+        </div>
+ 
+        <div class="text-right -mt-1">
+          <a id="forgotLink" href="#" class="text-xs text-gold opacity-75 hover:opacity-100 transition-opacity duration-200 tracking-wide">Forgot password?</a>
+        </div>
+                <p id="loginError" class="text-red-400 text-xs hidden"></p>
+        <button id="loginBtn" class="w-full py-3.5 rounded-xl text-xs font-medium tracking-widest uppercase
+                       hover:opacity-90 hover:-translate-y-px active:scale-[0.98] transition-all duration-200"
+                style="background:linear-gradient(135deg,#C9A84C 0%,#A8852F 100%);
+                       color:#0A0C14; box-shadow:0 4px 20px rgba(201,168,76,0.25);">
+          Sign In
+        </button>
+ 
+       
+      </form>
+      <!-- END LOGIN -->
+ 
+      <!-- SIGNUP -->
+      <form class="form-view slide-out-right flex flex-col gap-4" id="signupView" style="display:none;">
+ 
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-medium tracking-widest uppercase" style="color:rgba(255,255,255,0.45);">First name</label>
+            <input type="text" placeholder="Sarah"
+                   id="signupFirstName" class="w-full rounded-xl px-4 py-3 text-sm font-body transition-all duration-200"
+                   style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.92);" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-medium tracking-widest uppercase" style="color:rgba(255,255,255,0.45);">Last name</label>
+            <input type="text" placeholder="Sandy"
+                   id="signupLastName" class="w-full rounded-xl px-4 py-3 text-sm font-body transition-all duration-200"
+                   style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.92);" />
+          </div>
+        </div>
+ 
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-medium tracking-widest uppercase" style="color:rgba(255,255,255,0.45);"> email</label>
+          <input type="email" placeholder="you@gmail.com"
+                id="signupEmail" class="w-full rounded-xl px-4 py-3 text-sm font-body transition-all duration-200"
+                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.92);" />
+        </div>
+ 
+      
+ 
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-medium tracking-widest uppercase" style="color:rgba(255,255,255,0.45);">Password</label>
+          <input type="password" placeholder="Min. 8 characters"
+                id="signupPassword"  class="w-full rounded-xl px-4 py-3 text-sm font-body transition-all duration-200"
+                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.92);" />
+        </div>
+        <p id="signupError" class="text-red-400 text-xs hidden"></p>
+<p id="signupSuccess" class="text-green-400 text-xs hidden"></p>
+ 
+        <button id="signupBtn" class="w-full py-3.5 rounded-xl text-xs font-medium tracking-widest uppercase
+                       hover:opacity-90 hover:-translate-y-px active:scale-[0.98] transition-all duration-200"
+                style="background:linear-gradient(135deg,#C9A84C 0%,#A8852F 100%);
+                       color:#0A0C14; box-shadow:0 4px 20px rgba(201,168,76,0.25);">
+          Create Account
+        </button>
+ 
+        <p class="text-center text-[10.5px] leading-relaxed" style="color:rgba(255,255,255,0.38);">
+          By registering you agree to our
+          <a href="#" class="text-gold opacity-80 hover:opacity-100 transition-opacity">Terms of Service</a>
+          and
+          <a href="#" class="text-gold opacity-80 hover:opacity-100 transition-opacity">Privacy Policy</a>
+        </p>
+ 
+      </form>
+      <!-- END SIGNUP -->
+ 
+    </div>
+  </div>
+ 
+</section>
+<footer class="bg-black text-white footer-glow border-t border-amber-900/30" style="font-family:'Montserrat',sans-serif;">
+ 
+  <!-- Main Footer Grid -->
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+ 
+      <!-- Brand Column -->
+      <div class="lg:col-span-1 flex flex-col gap-5">
+        <div>
+          <h2 class="text-2xl font-semibold text-amber-500 tracking-wide" style="font-family:'EB Garamond',serif;">
+          Crow Secure Holdings
+          </h2>
+          <p class="text-xs tracking-[0.25em] text-amber-700/70 uppercase mt-1">Digital Asset Management</p>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Empowering investors to navigate the digital asset space with confidence, clarity, and proven strategy since 2019.
+        </p>
+        <!-- Social Icons -->
+        <div class="flex gap-5 mt-2">
+          <!-- X / Twitter -->
+          <a href="#" aria-label="Twitter" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- Telegram -->
+          <a href="#" aria-label="Telegram" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" aria-label="LinkedIn" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+ 
+      <!-- Quick Links -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">Quick Links</h3>
+        <ul class="flex flex-col gap-3 text-sm text-gray-400">
+          <li><a href="#" class="link-hover transition-colors duration-200">Home</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">About Us</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">Investment Packages</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">How It Works</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">Testimonials</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">FAQ</a></li>
+        </ul>
+      </div>
+ 
+      <!-- Investment Packages -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">Our Packages</h3>
+        <ul class="flex flex-col gap-3 text-sm text-gray-400">
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-800 inline-block"></span>
+            <a href="#" class="link-hover transition-colors duration-200">Bronze Package</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-400 inline-block"></span>
+            <a href="#" class="link-hover transition-colors duration-200">Silver Package</a>
+          </li>
+         
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 inline-block"></span>
+            <a href="#" class="link-hover transition-colors duration-200">Diamond Package</a>
+          </li>
+        </ul>
+      </div>
+ 
+      <!-- Contact & Newsletter -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">Get In Touch</h3>
+        <ul class="flex flex-col gap-3 text-sm text-gray-400">
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-amber-700 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>crowsecureholdings@gmail.com</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-amber-700 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Mon – Fri: 9AM – 6PM (UTC)</span>
+          </li>
+          
+        </ul>
+ 
+       
+        
+ 
+    <!-- Divider -->
+    <div class="divider-line h-px w-full my-10"></div>
+ 
+    <!-- Bottom Bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
+      <p>© 2026 Crow Secure Holdings. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-amber-600 transition-colors duration-200">Privacy Policy</a>
+        <a href="#" class="hover:text-amber-600 transition-colors duration-200">Terms of Service</a>
+        <a href="#" class="hover:text-amber-600 transition-colors duration-200">Risk Disclosure</a>
+      </div>
+     
+    </div>
+  </div>
+  
+ 
+</footer>
+   <script type="module" src="/src/auth.js"></script>  
+</body>
+</html>

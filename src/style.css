@@ -181,3 +181,20 @@
     z-index: -1;
   }
   #wa-btn { position: fixed; }
+
+  /* for the login and sign up page  */
+  /* @import "tailwindcss"; */
+
+@theme {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --color-gold: #C9A84C;
+  --color-gold-light: #E8C97A;
+  --color-gold-dark: #A8852F;
+
+  --color-navy-950: #080C18;
+  --color-navy-900: #0A0F1E;
+  --color-navy-800: #0F1629;
+  --color-navy-700: #0D1520;
+}

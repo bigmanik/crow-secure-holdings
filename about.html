@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="/src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>About us</title>
+</head>
+<body>
+    <header class="bg-black text-white flex items-center justify-between px-5 py-2 h-24 ">
+  <span class="mr-auto ">
+    <img src="/src/assets/crow.jpg" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-contain "></span>
+
+   <!-- Hamburger Button (mobile only) -->
+ 
+
+   <!-- Hamburger Button -->
+<button
+  id="hamburger"
+  class="md:hidden flex flex-col justify-center items-center gap-1.5 z-50 relative"
+>
+  <span class="block w-6 h-0.5 bg-white"></span>
+  <span class="block w-6 h-0.5 bg-white"></span>
+  <span class="block w-6 h-0.5 bg-white"></span>
+</button>
+
+<!-- Desktop Nav -->
+<ul class="hidden md:flex justify-center space-x-10 font-bold text-lg mr-10">
+  <li class="cursor-pointer"><a href="index.html">Home</a>  </li>
+  <li class="cursor-pointer"><a href="about.html">About</a></li>
+  <li class="cursor-pointer">Invest Now</li>
+  <li class="cursor-pointer">Contact</li>
+</ul>
+
+<!-- Overlay (click outside to close) -->
+<div
+  id="menu-overlay"
+  class="md:hidden fixed inset-0 bg-black/30 z-40
+         opacity-0 pointer-events-none transition-opacity duration-300"
+></div>
+
+<!-- Mobile Menu -->
+<ul
+  id="mobile-menu"
+  class="md:hidden fixed top-0 right-0 h-screen w-3/4 bg-black/80 backdrop-blur-sm
+         flex flex-col items-center justify-center gap-8
+         font-bold text-lg z-50
+         translate-x-full opacity-0 transition-all duration-300 ease-in-out"
+>
+  <!-- X Close Button -->
+  <button id="close-btn" class="absolute top-6 right-6 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <li class="cursor-pointer hover:text-gray-300"><a href="index.html">Home</a> </li>
+  <li class="cursor-pointer hover:text-gray-300"><a href="about.html">About</a></li>
+  <li class="cursor-pointer hover:text-gray-300">Invest Now</li>
+  <li class="cursor-pointer hover:text-gray-300">Contact</li>
+</ul>
+</header>
+<!-- body  -->
+
+
+
+<section class="relative w-full overflow-hidden bg-[#0a0a12] text-white">
+  
+  <!-- Background Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-[#c9a84c]/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-[#c9a84c]/3 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-0 w-64 h-64 bg-[#d4b76a]/3 rounded-full blur-3xl -translate-y-1/2"></div>
+  </div>
+
+  <!-- Hero Intro -->
+  <div class="relative z-10 px-6 sm:px-8 lg:px-16 xl:px-24 pt-20 sm:pt-28 lg:pt-36 pb-12 sm:pb-16">
+    <div class="max-w-5xl mx-auto text-center">
+      
+      <!-- Label -->
+      <div class="mb-6 opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#c9a84c]/30 bg-[#c9a84c]/5 text-[#d4b76a] text-xs sm:text-sm font-medium tracking-widest uppercase" style="font-family: 'Inter', sans-serif;">
+          <span class="w-2 h-2 rounded-full bg-[#d4b76a] animate-pulse"></span>
+          About Us
+        </span>
+      </div>
+      
+      <!-- Main Heading -->
+      <h2 class="font-garamond text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 sm:mb-8 opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="font-family: 'EB Garamond', serif; transition-delay: 0.2s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+        Welcome to <span style="background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Crow Secure Holdings</span>
+      </h2>
+      
+      <!-- Intro Paragraph -->
+      <p class="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-4 opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="font-family: 'EB Garamond', serif; transition-delay: 0.3s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+        Your trusted partner in achieving financial success in the cryptocurrency market. With years of experience navigating the complexities of the digital landscape, we are committed to helping our clients maximize their returns while managing risk with precision and care.
+      </p>
+      
+      <!-- Decorative Line -->
+      <div class="flex items-center justify-center gap-4 mt-8 sm:mt-10 opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.4s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+        <div class="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#c9a84c]/50"></div>
+        <svg class="w-5 h-5 text-[#d4b76a]" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 2l2.5 6.5L19 9l-5 4.5L15.5 20 10 16.5 4.5 20 6 13.5 1 9l6.5-.5z"/>
+        </svg>
+        <div class="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#c9a84c]/50"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="relative z-10 px-6 sm:px-8 lg:px-16 xl:px-24 py-10 sm:py-14">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+        <div class="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style="font-family: 'EB Garamond', serif; background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5+</div>
+          <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Years Experience</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.2s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style="font-family: 'EB Garamond', serif; background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$100M+</div>
+          <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Assets Managed</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.3s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style="font-family: 'EB Garamond', serif; background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5K+</div>
+          <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Global Clients</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.4s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style="font-family: 'EB Garamond', serif; background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">99.9%</div>
+          <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Uptime</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="relative z-10 px-6 sm:px-8 lg:px-16 xl:px-24 py-16 sm:py-20 lg:py-28">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-12 sm:mb-16 lg:mb-20">
+        <div class="mb-4 opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <span class="text-[#d4b76a] text-xs sm:text-sm font-medium tracking-widest uppercase" style="font-family: 'Inter', sans-serif;">Our Advantage</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="font-family: 'EB Garamond', serif; transition-delay: 0.2s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          Why Choose <span style="background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Crow Secure Holdings?</span>
+        </h2>
+        <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="font-family: 'EB Garamond', serif; transition-delay: 0.3s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          We believe financial freedom should be accessible to everyone. Our tailored investment packages are designed to meet diverse financial goals and risk preferences of clients worldwide.
+        </p>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- Card 1: Security -->
+        <div class="group relative p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm border border-white/10 hover:border-[#c9a84c]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="w-14 h-14 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/20 transition-colors duration-300">
+            <svg class="w-7 h-7 text-[#d4b76a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white" style="font-family: 'EB Garamond', serif;">Uncompromising Security</h3>
+          <p class="text-sm sm:text-base text-gray-400 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+            Your assets are protected by institutional-grade security protocols, multi-signature wallets, and cold storage solutions. We prioritize the safety of your investments above all else.
+          </p>
+        </div>
+
+        <!-- Card 2: Tailored Strategies -->
+        <div class="group relative p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm border border-white/10 hover:border-[#c9a84c]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.2s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="w-14 h-14 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/20 transition-colors duration-300">
+            <svg class="w-7 h-7 text-[#d4b76a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white" style="font-family: 'EB Garamond', serif;">Tailored Strategies</h3>
+          <p class="text-sm sm:text-base text-gray-400 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+            Whether you are a seasoned investor or just starting out, our expert advisors craft personalized investment packages aligned with your unique financial goals and risk appetite.
+          </p>
+        </div>
+
+        <!-- Card 3: Transparent Fees -->
+        <div class="group relative p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm border border-white/10 hover:border-[#c9a84c]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.3s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="w-14 h-14 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/20 transition-colors duration-300">
+            <svg class="w-7 h-7 text-[#d4b76a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white" style="font-family: 'EB Garamond', serif;">Transparent Fees</h3>
+          <p class="text-sm sm:text-base text-gray-400 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+            No hidden charges, no surprises. Our fee structure is clear and competitive, ensuring you keep more of what you earn. We believe in building trust through transparency.
+          </p>
+        </div>
+
+        <!-- Card 4: Real-Time Analytics -->
+        <div class="group relative p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm border border-white/10 hover:border-[#c9a84c]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="w-14 h-14 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/20 transition-colors duration-300">
+            <svg class="w-7 h-7 text-[#d4b76a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white" style="font-family: 'EB Garamond', serif;">Real-Time Analytics</h3>
+          <p class="text-sm sm:text-base text-gray-400 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+            Stay ahead of the market with our cutting-edge analytics dashboard. Monitor your portfolio performance, track market trends, and make informed decisions in real time.
+          </p>
+        </div>
+
+        <!-- Card 5: Dedicated Support -->
+        <div class="group relative p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm border border-white/10 hover:border-[#c9a84c]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.2s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="w-14 h-14 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/20 transition-colors duration-300">
+            <svg class="w-7 h-7 text-[#d4b76a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white" style="font-family: 'EB Garamond', serif;">Dedicated Support</h3>
+          <p class="text-sm sm:text-base text-gray-400 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+            Our team of certified financial experts is available around the clock to guide you every step of the way. From onboarding to portfolio optimization, we are here for you.
+          </p>
+        </div>
+
+        <!-- Card 6: Global Reach -->
+        <div class="group relative p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-sm border border-white/10 hover:border-[#c9a84c]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,168,76,0.15)] opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.3s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+          <div class="w-14 h-14 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/20 transition-colors duration-300">
+            <svg class="w-7 h-7 text-[#d4b76a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white" style="font-family: 'EB Garamond', serif;">Global Reach</h3>
+          <p class="text-sm sm:text-base text-gray-400 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+            Access global markets and diversify across multiple asset classes. Our platform connects you to opportunities worldwide, breaking down geographical barriers to wealth creation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission Statement -->
+  <div class="relative z-10 px-6 sm:px-8 lg:px-16 xl:px-24 py-16 sm:py-20 lg:py-28">
+    <div class="max-w-5xl mx-auto">
+      <div class="relative p-10 sm:p-14 lg:p-20 rounded-3xl bg-gradient-to-br from-[#c9a84c]/10 via-[#c9a84c]/5 to-transparent border border-[#c9a84c]/20 text-center opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+        <div class="absolute -top-6 left-1/2 -translate-x-1/2">
+          <div class="w-12 h-12 rounded-full bg-[#0a0a12] border border-[#c9a84c]/30 flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#d4b76a]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+          </div>
+        </div>
+        <blockquote class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white leading-relaxed italic mb-6" style="font-family: 'EB Garamond', serif;">
+          "Our mission is to democratize access to digital wealth, empowering individuals and institutions to build lasting financial legacies through innovative, secure, and transparent cryptocurrency investment solutions."
+        </blockquote>
+        <div class="flex items-center justify-center gap-3">
+          <div class="h-px w-8 bg-[#c9a84c]/50"></div>
+          <span class="text-sm text-[#d4b76a] uppercase tracking-widest" style="font-family: 'Inter', sans-serif;">The Crow Secure Holdings Vision</span>
+          <div class="h-px w-8 bg-[#c9a84c]/50"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="relative z-10 px-6 sm:px-8 lg:px-16 xl:px-24 pb-20 sm:pb-28 lg:pb-36">
+    <div class="max-w-4xl mx-auto text-center opacity-0 translate-y-[30px] transition-all duration-800 ease-out" style="transition-delay: 0.1s;" onload="this.style.opacity='1';this.style.transform='translateY(0)'">
+      <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6" style="font-family: 'EB Garamond', serif;">
+        Ready to Start Your <span style="background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 50%, #b8943f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Investment Journey?</span>
+      </h3>
+      <p class="text-base sm:text-lg text-gray-400 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed" style="font-family: 'Inter', sans-serif;">
+        Join thousands of satisfied clients who have entrusted their financial future to Crow Secure Holdings. Let our expertise work for you.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="account.html" class="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#c9a84c] to-[#b8943f] text-[#0a0a12] font-semibold text-sm sm:text-base hover:from-[#e8d5a3] hover:to-[#c9a84c] transition-all duration-300 shadow-lg shadow-[#c9a84c]/25 hover:shadow-[#c9a84c]/40" style="font-family: 'Inter', sans-serif;">
+          Get Started Today
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </a>
+       
+      </div>
+    </div>
+  </div>
+
+</section>
+<a  href="https://wa.me/2348012345678?text=Hello%2C%20I%20need%20support"
+  target="_blank"
+  rel="noopener noreferrer"
+  id="wa-btn"
+  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+>
+  <!-- WhatsApp SVG Icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white" viewBox="0 0 32 32">
+    <path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.47 2.027 7.774L0 32l8.469-2.001A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.782-1.858l-.486-.29-5.027 1.188 1.237-4.893-.318-.502A13.253 13.253 0 0 1 2.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.273-9.874c-.398-.199-2.353-1.16-2.718-1.292-.364-.133-.63-.199-.895.2-.265.398-1.028 1.292-1.26 1.558-.232.265-.464.298-.862.1-.398-.199-1.68-.619-3.2-1.976-1.183-1.055-1.981-2.358-2.214-2.757-.232-.398-.025-.614.175-.812.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.132-.265.066-.497-.033-.696-.1-.199-.895-2.159-1.226-2.957-.323-.776-.65-.671-.895-.683l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.36-1.393 3.319s1.426 3.85 1.625 4.116c.199.265 2.806 4.284 6.797 6.009.95.41 1.691.655 2.268.838.952.303 1.82.26 2.505.158.764-.114 2.353-.962 2.685-1.891.332-.929.332-1.726.232-1.891-.099-.166-.364-.265-.762-.464z"/>
+  </svg>
+  <span class="text-sm font-semibold hidden sm:inline">Chat with us</span>
+</a></div>
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+
+  <!-- Telegram -->
+  <a href="https://t.me/yourusername" target="_blank"
+     class="flex items-center gap-2 bg-[#229ED9] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-200">
+    <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.26 13.593l-2.948-.924c-.64-.203-.653-.64.136-.954l11.57-4.461c.537-.194 1.006.131.876.967z"/>
+    </svg>
+    <span class="text-sm font-semibold hidden sm:inline">Telegram</span>
+  </a>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/2348012345678?text=Hello%2C%20I%20need%20support" target="_blank"
+     class="flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-200">
+    <svg class="w-6 h-6 fill-white" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.47 2.027 7.774L0 32l8.469-2.001A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.273 19.459c-.398-.199-2.353-1.16-2.718-1.292-.364-.133-.63-.199-.895.2-.265.398-1.028 1.292-1.26 1.558-.232.265-.464.298-.862.1-.398-.199-1.68-.619-3.2-1.976-1.183-1.055-1.981-2.358-2.214-2.757-.232-.398-.025-.614.175-.812.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.132-.265.066-.497-.033-.696-.1-.199-.895-2.159-1.226-2.957-.323-.776-.65-.671-.895-.683l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.36-1.393 3.319s1.426 3.85 1.625 4.116c.199.265 2.806 4.284 6.797 6.009.95.41 1.691.655 2.268.838.952.303 1.82.26 2.505.158.764-.114 2.353-.962 2.685-1.891.332-.929.332-1.726.232-1.891-.099-.166-.364-.265-.762-.464z"/>
+    </svg>
+    <span class="text-sm font-semibold hidden sm:inline">WhatsApp</span>
+  </a>
+
+</div>
+
+
+<footer class="bg-black text-white footer-glow border-t border-amber-900/30" style="font-family:'Montserrat',sans-serif;">
+ 
+  <!-- Main Footer Grid -->
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+ 
+      <!-- Brand Column -->
+      <div class="lg:col-span-1 flex flex-col gap-5">
+        <div>
+          <h2 class="text-2xl font-semibold text-amber-500 tracking-wide" style="font-family:'EB Garamond',serif;">
+          Crow Secure Holdings
+          </h2>
+          <p class="text-xs tracking-[0.25em] text-amber-700/70 uppercase mt-1">Digital Asset Management</p>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Empowering investors to navigate the digital asset space with confidence, clarity, and proven strategy since 2019.
+        </p>
+        <!-- Social Icons -->
+        <div class="flex gap-5 mt-2">
+          <!-- X / Twitter -->
+          <a href="#" aria-label="Twitter" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- Telegram -->
+          <a href="#" aria-label="Telegram" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" aria-label="LinkedIn" class="social-icon text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+ 
+      <!-- Quick Links -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">Quick Links</h3>
+        <ul class="flex flex-col gap-3 text-sm text-gray-400">
+          <li><a href="#" class="link-hover transition-colors duration-200">Home</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">About Us</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">Investment Packages</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">How It Works</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">Testimonials</a></li>
+          <li><a href="#" class="link-hover transition-colors duration-200">FAQ</a></li>
+        </ul>
+      </div>
+ 
+      <!-- Investment Packages -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">Our Packages</h3>
+        <ul class="flex flex-col gap-3 text-sm text-gray-400">
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-800 inline-block"></span>
+            <a href="#" class="link-hover transition-colors duration-200">Bronze Package</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-400 inline-block"></span>
+            <a href="#" class="link-hover transition-colors duration-200">Silver Package</a>
+          </li>
+         
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 inline-block"></span>
+            <a href="#" class="link-hover transition-colors duration-200">Diamond Package</a>
+          </li>
+        </ul>
+      </div>
+ 
+      <!-- Contact & Newsletter -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-amber-600 text-sm uppercase tracking-[0.2em] font-medium" style="font-family:'EB Garamond',serif;">Get In Touch</h3>
+        <ul class="flex flex-col gap-3 text-sm text-gray-400">
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-amber-700 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>crowsecureholdings@gmail.com</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-amber-700 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Mon – Fri: 9AM – 6PM (UTC)</span>
+          </li>
+          
+        </ul>
+ 
+       
+        
+ 
+    <!-- Divider -->
+    <div class="divider-line h-px w-full my-10"></div>
+ 
+    <!-- Bottom Bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
+      <p>© 2026 Crow Secure Holdings. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-amber-600 transition-colors duration-200">Privacy Policy</a>
+        <a href="#" class="hover:text-amber-600 transition-colors duration-200">Terms of Service</a>
+        <a href="#" class="hover:text-amber-600 transition-colors duration-200">Risk Disclosure</a>
+      </div>
+     
+    </div>
+  </div>
+ 
+</footer>
+   <script type="module" src="/src/main.js"></script>  
+</body>
+</html>
