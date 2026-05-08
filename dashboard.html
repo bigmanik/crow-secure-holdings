@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — Crow Secure Holdings</title>
+  <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body>
-    
+<body class="bg-gray-950 text-gray-100 min-h-screen font-sans">
+
+  <!-- NAV -->
+  <nav class="border-b border-gray-800 bg-gray-900">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <span class="font-semibold text-white tracking-tight">Crow Secure Holdings</span>
+      <div class="flex items-center gap-6 text-sm text-gray-400">
+        <span class="text-white font-medium">Dashboard</span>
+        <a href="#withdraw-section" class="hover:text-white transition">Withdraw</a>
+        <a href="#history-section" class="hover:text-white transition">History</a>
+        <button id="logout-btn" class="hover:text-red-400 transition">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-6 py-10">
+
+    <!-- Greeting -->
+    <div class="mb-8">
+      <p class="text-gray-400 text-sm mb-1">Welcome back,</p>
+      <h1 id="user-name" class="text-2xl font-semibold text-white">—</h1>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">Current Balance</p>
+        <p id="stat-balance" class="text-3xl font-semibold text-white">—</p>
+      </div>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">Total P&amp;L</p>
+        <p id="stat-pnl" class="text-3xl font-semibold text-green-400">—</p>
+      </div>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">Total Withdrawn</p>
+        <p id="stat-withdrawn" class="text-3xl font-semibold text-white">—</p>
+      </div>
+    </div>
+
+    <!-- Transaction History -->
+    <div id="history-section" class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-8">
+      <h2 class="text-sm font-semibold text-white mb-4">Transaction History</h2>
+      <div id="tx-list" class="divide-y divide-gray-800 text-sm">
+        <p class="text-gray-500 py-4">Loading...</p>
+      </div>
+    </div>
+
+    <!-- Withdrawal Request -->
+    <div id="withdraw-section" class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+      <h2 class="text-sm font-semibold text-white mb-1">Request Withdrawal</h2>
+      <p class="text-gray-500 text-xs mb-4">Withdrawals are reviewed within 24 hours.</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input
+          id="withdraw-amount"
+          type="number"
+          placeholder="Amount (USD)"
+          class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500"
+        />
+        <input
+          id="withdraw-wallet"
+          type="text"
+          placeholder="Wallet address"
+          class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500"
+        />
+        <button
+          id="withdraw-btn"
+          class="bg-white text-gray-900 font-semibold text-sm px-6 py-2.5 rounded-lg hover:bg-gray-200 transition whitespace-nowrap"
+        >
+          Submit
+        </button>
+      </div>
+      <p id="withdraw-msg" class="mt-3 text-sm hidden"></p>
+    </div>
+
+  </main>
+
+  <script type="module" src="/src/dashboard.js"></script>
 </body>
 </html>

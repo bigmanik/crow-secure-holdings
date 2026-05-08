@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — Crow Secure Holdings</title>
+  <link rel="stylesheet" href="/src/style.css"/>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen font-sans">
+
+  <!-- NAV -->
+  <nav class="border-b border-gray-800 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <span class="font-semibold text-white tracking-tight">Crow Secure — <span class="text-purple-400">Admin</span></span>
+      <div class="flex items-center gap-6 text-sm text-gray-400">
+        <button id="tab-users" class="tab-btn text-white font-medium">Users</button>
+        <button id="tab-withdrawals" class="tab-btn hover:text-white transition">Withdrawals</button>
+        <button id="logout-btn" class="hover:text-red-400 transition">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 py-10">
+
+    <!-- USERS PANEL -->
+    <div id="panel-users">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold text-white">All Users</h2>
+        <span id="user-count" class="text-xs text-gray-500"></span>
+      </div>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
+              <th class="text-left px-5 py-3">Name</th>
+              <th class="text-left px-5 py-3">Email</th>
+              <th class="text-left px-5 py-3">Balance</th>
+              <th class="text-left px-5 py-3">Role</th>
+              <th class="text-left px-5 py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody">
+            <tr><td colspan="5" class="px-5 py-6 text-gray-500">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- WITHDRAWALS PANEL -->
+    <div id="panel-withdrawals" class="hidden">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold text-white">Withdrawal Requests</h2>
+        <span id="pending-count" class="text-xs text-yellow-500"></span>
+      </div>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
+              <th class="text-left px-5 py-3">User</th>
+              <th class="text-left px-5 py-3">Amount</th>
+              <th class="text-left px-5 py-3">Wallet</th>
+              <th class="text-left px-5 py-3">Status</th>
+              <th class="text-left px-5 py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="withdrawals-tbody">
+            <tr><td colspan="5" class="px-5 py-6 text-gray-500">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Deposit / PnL Modal -->
+  <div id="modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 w-full max-w-sm mx-4">
+      <h3 id="modal-title" class="text-white font-semibold mb-4">Action</h3>
+      <input id="modal-amount" type="number" placeholder="Amount (USD)"
+        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none mb-3"/>
+      <!-- PnL-only fields -->
+      <div id="pnl-fields" class="hidden">
+        <select id="modal-mode"
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white mb-3 focus:outline-none">
+          <option value="fixed">Fixed amount</option>
+          <option value="percent">Percentage of principal</option>
+        </select>
+        <input id="modal-note" type="text" placeholder="Note (e.g. Week 1 returns)"
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none mb-3"/>
+      </div>
+      <p id="modal-error" class="text-red-400 text-xs mb-3 hidden"></p>
+      <div class="flex gap-3">
+        <button id="modal-cancel"
+          class="flex-1 border border-gray-700 text-gray-300 text-sm py-2.5 rounded-lg hover:bg-gray-800 transition">
+          Cancel
+        </button>
+        <button id="modal-confirm"
+          class="flex-1 bg-white text-gray-900 font-semibold text-sm py-2.5 rounded-lg hover:bg-gray-200 transition">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

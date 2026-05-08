@@ -1,33 +1,34 @@
+import 'dotenv/config'; // ✅ MUST be first — ESM hoists imports so this loads before everything
+
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
-
-dotenv.config(); // loads your .env file
+import userRoutes from './routes/user.js';
+import adminRoutes from './routes/admin.js';
+import verifyToken from './middleware/verifyToken.js';
+import requireAdmin from './middleware/requireAdmin.js';
 
 const app = express();
 
-// ── Middleware ──────────────────────────────────────────────
-// Allow your Vite frontend to talk to this backend
+// ── Middleware ───────────────────────────────────────────────
 app.use(cors({
-  origin: 'http://localhost:5173', // Vite's default port
+  origin: 'http://localhost:5173',
   credentials: true
 }));
-
-// Parse incoming JSON request bodies
 app.use(express.json());
 
-// ── Routes ──────────────────────────────────────────────────
-// All auth routes live under /api/auth
-app.use('/api/auth', authRoutes);
+// ── Routes ───────────────────────────────────────────────────
+app.use('/api/auth',  authRoutes);
+app.use('/api/user',  verifyToken, userRoutes);
+app.use('/api/admin', verifyToken, requireAdmin, adminRoutes);
 
-// Health check — visit http://localhost:5000/ to confirm server is running
+// Health check
 app.get('/', (req, res) => {
   res.json({ message: 'Crow Secure Holdings API is running ✓' });
 });
 
-// ── Connect to MongoDB then start server ─────────────────────
+// ── Database + Server ────────────────────────────────────────
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -38,5 +39,5 @@ mongoose
   })
   .catch((err) => {
     console.error('❌ MongoDB connection failed:', err.message);
-    process.exit(1); // stop the server if DB fails
+    process.exit(1);
   });

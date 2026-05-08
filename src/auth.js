@@ -219,3 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// Role-based redirect
+if (data.data.user.role === 'admin') {
+  window.location.href = '/admin.html'
+} else {
+  window.location.href = '/dashboard.html'
+}

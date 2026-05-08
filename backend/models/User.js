@@ -42,12 +42,21 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
+    resetToken: {
+    type: String,
+    default: null,
+  },
+  resetTokenExpiry: {
+    type: Date,
+    default: null,
+  },
   },
   {
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
+  
 );
 
 // ── Virtual for full name ────────────────────────────────────

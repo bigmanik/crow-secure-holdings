@@ -1,6 +1,17 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { register, login, forgotPassword, resetPassword } from '../controllers/authController.js';
+import validate from '../middleware/validate.js';
+import {
+  registerRules,
+  loginRules,
+  forgotPasswordRules,
+  resetPasswordRules,
+} from '../middleware/validationRules.js';
+
+// const router = Router();
+
 
 const router = express.Router();
 
@@ -108,5 +119,12 @@ router.post('/login', async (req, res) => {
     });
   }
 });
+
+// Rules array runs first → validate checks for errors → controller runs only if clean
+router.post('/register',       registerRules,       validate, register);
+router.post('/login',          loginRules,          validate, login);
+router.post('/forgot-password', forgotPasswordRules, validate, forgotPassword);
+router.post('/reset-password',  resetPasswordRules,  validate, resetPassword);
+
 
 export default router;
