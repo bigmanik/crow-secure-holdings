@@ -14,7 +14,7 @@ export function getStoredUser() {
 export function logout() {
   localStorage.removeItem('crow_token')
   localStorage.removeItem('crow_user')
-  window.location.href = '/index.html'
+  window.location.href = '/account.html'
 }
 
 function authHeaders() {
@@ -105,3 +105,4 @@ export async function adminResolveWithdrawal(withdrawalId, action) {
   })
   return handleResponse(res)
 }
+

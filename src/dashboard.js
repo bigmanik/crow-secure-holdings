@@ -8,6 +8,10 @@ import {
   requestWithdrawal
 } from './api.js'
 
+
+// At the top of dashboard.js or any protected page script
+
+
 // ── Auth Guard ────────────────────────────────────────────────
 // ES modules are deferred — DOM is ready, no DOMContentLoaded needed
 if (!getToken()) {
@@ -150,10 +154,14 @@ if (withdrawBtn) {
   })
 }
 
-// ── Logout ────────────────────────────────────────────────────
+//logout
 if (logoutBtn) {
   logoutBtn.addEventListener('click', logout)
 }
+const user = JSON.parse(localStorage.getItem('crow_user'));
+if (!user) window.location.href = '/account.html';
+if (user.role === 'admin') window.location.href = '/admin.html';
+
 
 // ── Init ──────────────────────────────────────────────────────
 loadDashboard()

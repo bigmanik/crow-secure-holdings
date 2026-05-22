@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 import sendEmail from '../utils/sendEmail.js';
+import RefreshToken from '../models/RefreshToken.js';
 
 // ─── Register ────────────────────────────────────────────────
 export const register = async (req, res) => {
@@ -57,6 +58,28 @@ export const login = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Server error.' });
   }
+  //logout
+
+  // const accessToken = jwt.sign(
+  //   { id: user._id, role: user.role },
+  //   process.env.JWT_SECRET,
+  //   { expiresIn: '15m' }
+  // );
+
+  // const refreshToken = jwt.sign(
+  //   { id: user._id },
+  //   process.env.REFRESH_TOKEN_SECRET,
+  //   { expiresIn: '7d' }
+  // );
+
+  // // Persist the refresh token
+  // await RefreshToken.create({
+  //   token: refreshToken,
+  //   userId: user._id,
+  //   expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  // });
+
+  // res.json({ accessToken, refreshToken });
 };
 
 // ─── Forgot Password ─────────────────────────────────────────
@@ -136,3 +159,33 @@ export const resetPassword = async (req, res) => {
     res.status(500).json({ error: 'Server error.' });
   }
 };
+
+//logout
+
+
+export const logout = async (req, res) => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    return res.status(400).json({ message: 'Refresh token required' });
+  }
+
+  try {
+    const deleted = await RefreshToken.findOneAndDelete({ token: refreshToken });
+
+    if (!deleted) {
+      // Token wasn't in DB — already logged out or never valid
+      // Still return 200; don't leak info
+      return res.status(200).json({ message: 'Logged out' });
+    }
+
+    return res.status(200).json({ message: 'Logged out successfully' });
+  } catch (err) {
+    console.error('Logout error:', err);
+    return res.status(500).json({ message: 'Server error during logout' });
+  }
+};
+
+
+
+

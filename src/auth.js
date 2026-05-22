@@ -138,13 +138,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!response.ok) {
           setError('loginError', data.message || 'Login failed. Try again.');
-        } else {
-          // ✅ Store token + user, then redirect
-          localStorage.setItem('crow_token', data.token);
-          localStorage.setItem('crow_user',  JSON.stringify(data.data.user));
-          window.location.href = '/dashboard.html';
-        }
+        
+        // else {
+        //   // ✅ Store token + user, then redirect
+        //   localStorage.setItem('crow_token', data.token);
+        //   localStorage.setItem('crow_user',  JSON.stringify(data.data.user));
+        //   window.location.href = '/dashboard.html';
+        // }
 
+          // AFTER (fixed)
+} else {
+  localStorage.setItem('crow_token', data.token);
+  localStorage.setItem('crow_user',  JSON.stringify(data.data.user));
+
+  // Role-based redirect
+  const role = data.data.user.role;
+  if (role === 'admin') {
+    window.location.href = '/admin.html';
+  } else {
+    window.location.href = '/dashboard.html';
+  }
+}
       } catch (err) {
         setError('loginError', 'Cannot reach server. Is the backend running?');
         console.error('Login fetch error:', err);
@@ -203,9 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
             successEl.classList.remove('hidden');
           }
 
+          // setTimeout(() => {
+          //   window.location.href = '/dashboard.html';
+          // }, 1500);
           setTimeout(() => {
-            window.location.href = '/dashboard.html';
-          }, 1500);
+  const role = data.data.user.role;
+  window.location.href = role === 'admin' ? '/admin.html' : '/dashboard.html';
+}, 1500);
         }
 
       } catch (err) {
@@ -219,6 +237,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// const token = localStorage.getItem('crow_token');
+
+// if (token) {
+//   window.location.href = '/dashboard.html'; // or wherever your app starts
+// }
 
 // Role-based redirect
 if (data.data.user.role === 'admin') {

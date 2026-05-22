@@ -19,6 +19,33 @@ if (storedUser && storedUser.role !== 'admin') {
   window.location.href = '/dashboard.html'
 }
 
+
+
+// ── Hamburger menu (your existing logic, preserved) ───────────
+const hamburger  = document.getElementById('hamburger')
+const mobileMenu = document.getElementById('mobile-menu')
+const closeBtn   = document.getElementById('close-btn')
+const overlay    = document.getElementById('menu-overlay')
+
+if (hamburger && mobileMenu && closeBtn && overlay) {
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.remove('translate-x-full', 'opacity-0')
+    overlay.classList.remove('opacity-0', 'pointer-events-none')
+    hamburger.classList.add('hidden')
+  })
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('translate-x-full', 'opacity-0')
+    overlay.classList.add('opacity-0', 'pointer-events-none')
+    hamburger.classList.remove('hidden')
+  })
+  overlay.addEventListener('click', () => {
+    mobileMenu.classList.add('translate-x-full', 'opacity-0')
+    overlay.classList.add('opacity-0', 'pointer-events-none')
+    hamburger.classList.remove('hidden')
+  })
+}
+
+
 // ── DOM refs ──────────────────────────────────────────────────
 const panelUsers       = document.getElementById('panel-users')
 const panelWithdrawals = document.getElementById('panel-withdrawals')
@@ -28,7 +55,8 @@ const usersTbody       = document.getElementById('users-tbody')
 const withdrawalsTbody = document.getElementById('withdrawals-tbody')
 const userCount        = document.getElementById('user-count')
 const pendingCount     = document.getElementById('pending-count')
-const logoutBtn        = document.getElementById('logout-btn')
+const logoutBtn        = document.getElementById('logoutBtn')
+
 
 // Modal refs
 const modal        = document.getElementById('modal')
@@ -252,7 +280,14 @@ async function loadWithdrawals() {
 }
 
 // ── Logout ────────────────────────────────────────────────────
-logoutBtn.addEventListener('click', logout)
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', logout)
+}
+
+const user = JSON.parse(localStorage.getItem('crow_user'));
+if (!user) window.location.href = '/account.html';
+if (user.role !== 'admin') window.location.href = '/dashboard.html';
 
 // ── Init ──────────────────────────────────────────────────────
 loadUsers()
