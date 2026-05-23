@@ -12,7 +12,7 @@ import {
 
 // ── Guard: admin only ─────────────────────────────────────────
 if (!getToken()) {
-  window.location.href = '/index.html'
+  window.location.href = '/account.html'
 }
 const storedUser = getStoredUser()
 if (storedUser && storedUser.role !== 'admin') {
@@ -55,7 +55,7 @@ const usersTbody       = document.getElementById('users-tbody')
 const withdrawalsTbody = document.getElementById('withdrawals-tbody')
 const userCount        = document.getElementById('user-count')
 const pendingCount     = document.getElementById('pending-count')
-const logoutBtn        = document.getElementById('logoutBtn')
+const logoutBtns    = document.querySelectorAll('.logoutBtn') 
 
 
 // Modal refs
@@ -281,13 +281,20 @@ async function loadWithdrawals() {
 
 // ── Logout ────────────────────────────────────────────────────
 
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', logout)
-}
+// if (logoutBtn) {
+//   logoutBtn.addEventListener('click', logout)
+// }
 
-const user = JSON.parse(localStorage.getItem('crow_user'));
-if (!user) window.location.href = '/account.html';
-if (user.role !== 'admin') window.location.href = '/dashboard.html';
+// const user = JSON.parse(localStorage.getItem('crow_user'));
+// if (!user) window.location.href = '/account.html';
+// if (user.role !== 'admin') window.location.href = '/dashboard.html';
+
+logoutBtns.forEach(btn => {
+  btn.addEventListener('click', logout);
+});
+
+
+
 
 // ── Init ──────────────────────────────────────────────────────
 loadUsers()

@@ -31,7 +31,7 @@ const statWithdrawn = document.getElementById('stat-withdrawn')
 const txList        = document.getElementById('tx-list')
 const withdrawBtn   = document.getElementById('withdraw-btn')
 const withdrawMsg   = document.getElementById('withdraw-msg')
-const logoutBtn     = document.getElementById('logoutBtn')       // your existing id
+const logoutBtns    = document.querySelectorAll('.logoutBtn')      // your existing id
 
 // ── Hamburger menu (your existing logic, preserved) ───────────
 const hamburger  = document.getElementById('hamburger')
@@ -155,12 +155,16 @@ if (withdrawBtn) {
 }
 
 //logout
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', logout)
-}
+
+
+logoutBtns.forEach(btn => {
+  btn.addEventListener('click', logout);
+});
+
+// Auth guard
 const user = JSON.parse(localStorage.getItem('crow_user'));
 if (!user) window.location.href = '/account.html';
-if (user.role === 'admin') window.location.href = '/admin.html';
+if (user && user.role === 'admin') window.location.href = '/admin.html';
 
 
 // ── Init ──────────────────────────────────────────────────────
