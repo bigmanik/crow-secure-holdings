@@ -80,54 +80,61 @@
     <button id="tab-withdrawals" class="tab-btn text-gray-400 hover:text-white transition">Withdrawals</button>
   </div>
 
-    <!-- USERS PANEL -->
-    <div id="panel-users">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg font-semibold text-white">All Users</h2>
-        <span id="user-count" class="text-xs text-gray-500"></span>
-      </div>
-      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
-              <th class="text-left px-5 py-3">Name</th>
-              <th class="text-left px-5 py-3">Email</th>
-              <th class="text-left px-5 py-3">Balance</th>
-              <th class="text-left px-5 py-3">Role</th>
-              <th class="text-left px-5 py-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="users-tbody">
-            <tr><td colspan="5" class="px-5 py-6 text-gray-500">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
+  <!-- USERS PANEL -->
+<div id="panel-users">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-lg font-semibold text-white">All Users</h2>
+    <span id="user-count" class="text-xs text-gray-500"></span>
+  </div>
+  <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm responsive-table">
+        <thead>
+          <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
+            <th class="text-left px-5 py-3">Name</th>
+            <th class="text-left px-5 py-3">Email</th>
+            <th class="text-left px-5 py-3">Balance</th>
+            <th class="text-left px-5 py-3">Role</th>
+            <th class="text-left px-5 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody">
+          <tr>
+            <td data-label="Name" colspan="5" class="px-5 py-6 text-gray-500">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
 
-    <!-- WITHDRAWALS PANEL -->
-    <div id="panel-withdrawals" class="hidden">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg font-semibold text-white">Withdrawal Requests</h2>
-        <span id="pending-count" class="text-xs text-yellow-500"></span>
-      </div>
-      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
-              <th class="text-left px-5 py-3">User</th>
-              <th class="text-left px-5 py-3">Amount</th>
-              <th class="text-left px-5 py-3">Wallet</th>
-              <th class="text-left px-5 py-3">Status</th>
-              <th class="text-left px-5 py-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="withdrawals-tbody">
-            <tr><td colspan="5" class="px-5 py-6 text-gray-500">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
+<!-- WITHDRAWALS PANEL -->
+<div id="panel-withdrawals" class="hidden">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-lg font-semibold text-white">Withdrawal Requests</h2>
+    <span id="pending-count" class="text-xs text-yellow-500"></span>
+  </div>
+  <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm responsive-table">
+        <thead>
+          <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
+            <th class="text-left px-5 py-3">User</th>
+            <th class="text-left px-5 py-3">Amount</th>
+            <th class="text-left px-5 py-3">Wallet</th>
+            <th class="text-left px-5 py-3">Status</th>
+            <th class="text-left px-5 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="withdrawals-tbody">
+          <tr>
+            <td data-label="User" colspan="5" class="px-5 py-6 text-gray-500">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
+  </div>
+</div>
   </main>
 
   <!-- Deposit / PnL Modal -->

@@ -148,10 +148,11 @@ modalConfirm.addEventListener('click', async () => {
   }
 })
 
+
 // ── Render users ──────────────────────────────────────────────
 function renderUsers(users) {
   if (!users || users.length === 0) {
-    usersTbody.innerHTML = '<tr><td colspan="5" class="px-5 py-6 text-gray-500">No users found.</td></tr>'
+    usersTbody.innerHTML = '<tr><td data-label="Name" colspan="5" class="px-5 py-6 text-gray-500">No users found.</td></tr>'
     return
   }
   userCount.textContent = `${users.length} user${users.length !== 1 ? 's' : ''}`
@@ -160,11 +161,11 @@ function renderUsers(users) {
     const balance = fmt(u.investment?.currentBalance ?? u.currentBalance ?? 0)
     return `
       <tr class="border-b border-gray-800 hover:bg-gray-800/40 transition">
-        <td class="px-5 py-4">${u.firstName} ${u.lastName}</td>
-        <td class="px-5 py-4 text-gray-400 font-mono text-xs">${u.email}</td>
-        <td class="px-5 py-4 font-medium">${balance}</td>
-        <td class="px-5 py-4">${roleBadge(u.role)}</td>
-        <td class="px-5 py-4">
+        <td data-label="Name" class="px-5 py-4">${u.firstName} ${u.lastName}</td>
+        <td data-label="Email" class="px-5 py-4 text-gray-400 font-mono text-xs">${u.email}</td>
+        <td data-label="Balance" class="px-5 py-4 font-medium">${balance}</td>
+        <td data-label="Role" class="px-5 py-4">${roleBadge(u.role)}</td>
+        <td data-label="Actions" class="px-5 py-4">
           <div class="flex gap-2">
             <button
               class="text-xs px-3 py-1.5 rounded-lg bg-blue-900/40 text-blue-400 hover:bg-blue-900/60 transition"
@@ -182,7 +183,7 @@ function renderUsers(users) {
     `
   }).join('')
 
-  // Attach button listeners via delegation
+  // Attach button listeners via delegation (unchanged)
   usersTbody.querySelectorAll('button[data-action]').forEach(btn => {
     btn.addEventListener('click', () => {
       const { action, id } = btn.dataset
@@ -201,10 +202,11 @@ function renderUsers(users) {
   })
 }
 
+
 // ── Render withdrawals ────────────────────────────────────────
 function renderWithdrawals(withdrawals) {
   if (!withdrawals || withdrawals.length === 0) {
-    withdrawalsTbody.innerHTML = '<tr><td colspan="5" class="px-5 py-6 text-gray-500">No withdrawal requests.</td></tr>'
+    withdrawalsTbody.innerHTML = '<tr><td data-label="User" colspan="5" class="px-5 py-6 text-gray-500">No withdrawal requests.</td></tr>'
     return
   }
 
@@ -219,11 +221,11 @@ function renderWithdrawals(withdrawals) {
 
     return `
       <tr class="border-b border-gray-800 hover:bg-gray-800/40 transition">
-        <td class="px-5 py-4">${userName}</td>
-        <td class="px-5 py-4 font-medium">${fmt(w.amount)}</td>
-        <td class="px-5 py-4 font-mono text-xs text-gray-400" title="${wallet}">${shortWallet}</td>
-        <td class="px-5 py-4">${statusBadge(w.status)}</td>
-        <td class="px-5 py-4">
+        <td data-label="User" class="px-5 py-4">${userName}</td>
+        <td data-label="Amount" class="px-5 py-4 font-medium">${fmt(w.amount)}</td>
+        <td data-label="Wallet" class="px-5 py-4 font-mono text-xs text-gray-400" title="${wallet}">${shortWallet}</td>
+        <td data-label="Status" class="px-5 py-4">${statusBadge(w.status)}</td>
+        <td data-label="Actions" class="px-5 py-4">
           <div class="flex gap-2">
             <button
               class="text-xs px-3 py-1.5 rounded-lg transition ${isPending ? 'bg-green-900/40 text-green-400 hover:bg-green-900/60' : 'opacity-30 cursor-not-allowed bg-gray-800 text-gray-500'}"
@@ -265,7 +267,7 @@ async function loadUsers() {
     const users = res.data?.users || res.users || res
     renderUsers(Array.isArray(users) ? users : [])
   } catch (err) {
-    usersTbody.innerHTML = `<tr><td colspan="5" class="px-5 py-6 text-red-400">${err.message}</td></tr>`
+    usersTbody.innerHTML = `<tr><td data-label="Name" colspan="5" class="px-5 py-6 text-red-400">${err.message}</td></tr>`
   }
 }
 
@@ -275,19 +277,12 @@ async function loadWithdrawals() {
     const withdrawals = res.data?.withdrawals || res.withdrawals || res
     renderWithdrawals(Array.isArray(withdrawals) ? withdrawals : [])
   } catch (err) {
-    withdrawalsTbody.innerHTML = `<tr><td colspan="5" class="px-5 py-6 text-red-400">${err.message}</td></tr>`
+    withdrawalsTbody.innerHTML = `<tr><td data-label="User" colspan="5" class="px-5 py-6 text-red-400">${err.message}</td></tr>`
   }
 }
-
 // ── Logout ────────────────────────────────────────────────────
 
-// if (logoutBtn) {
-//   logoutBtn.addEventListener('click', logout)
-// }
 
-// const user = JSON.parse(localStorage.getItem('crow_user'));
-// if (!user) window.location.href = '/account.html';
-// if (user.role !== 'admin') window.location.href = '/dashboard.html';
 
 logoutBtns.forEach(btn => {
   btn.addEventListener('click', logout);

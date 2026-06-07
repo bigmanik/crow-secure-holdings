@@ -117,3 +117,173 @@ initTicker();
   document.querySelectorAll('[class*=\"translate-y-[30px]\"]').forEach(el => {
     observer.observe(el);
   });
+
+  // forgot-password
+
+  const API_BASE = 'http://localhost:5000/api';
+ 
+    async function handleForgotPassword() {
+      const email   = document.getElementById('email').value.trim();
+      const btn     = document.getElementById('submitBtn');
+      const spinner = document.getElementById('spinner');
+      const btnText = document.getElementById('btnText');
+ 
+      if (!email) { showError('Please enter your email address.'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('Please enter a valid email address.'); return;
+      }
+ 
+      btn.disabled = true;
+      spinner.classList.remove('hidden');
+      btnText.textContent = 'Sending…';
+      document.getElementById('errorMsg').classList.remove('show');
+ 
+      try {
+        const res  = await fetch(`${API_BASE}/auth/forgot-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || data.message || 'Something went wrong.');
+        showSentState(email);
+      } catch (err) {
+        showError(err.message || 'Unable to reach the server. Please try again.');
+        btn.disabled = false;
+        spinner.classList.add('hidden');
+        btnText.textContent = 'Send Reset Link';
+      }
+    }
+ 
+    function showError(msg) {
+      document.getElementById('errorText').textContent = msg;
+      document.getElementById('errorMsg').classList.add('show');
+    }
+ 
+    function showSentState(email) {
+      document.getElementById('formState').classList.add('hidden');
+      document.getElementById('backLink').classList.add('hidden');
+      document.getElementById('sentEmail').textContent = email;
+      document.getElementById('sentState').classList.remove('hidden');
+    }
+ 
+    document.getElementById('email').addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleForgotPassword();
+    });
+
+    //reset-password 
+  
+    // ── 1. Read token from URL ────────────────────────────────────
+    const token = new URLSearchParams(window.location.search).get('token');
+
+    if (!token) {
+      document.getElementById('formState').style.display    = 'none';
+      document.getElementById('invalidState').style.display = 'block';
+      document.getElementById('backLink').style.display     = 'none';
+    }
+
+    // ── 2. Toggle password visibility ────────────────────────────
+    function togglePw(id, btn) {
+      const input  = document.getElementById(id);
+      const isText = input.type === 'text';
+      input.type   = isText ? 'password' : 'text';
+      btn.innerHTML = isText
+        ? `<svg class="w-[17px] h-[17px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+             <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+           </svg>`
+        : `<svg class="w-[17px] h-[17px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+             <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.97 9.97 0 012.12-3.73M6.53 6.53A9.97 9.97 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.97 9.97 0 01-4.512 5.393M3 3l18 18"/>
+           </svg>`;
+    }
+
+    // ── 3. Password strength meter ────────────────────────────────
+    function updateStrength(val) {
+      let score = 0;
+      if (val.length >= 8)                         score++;
+      if (/[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+      if (/\d/.test(val))                          score++;
+      if (/[^A-Za-z0-9]/.test(val))               score++;
+
+      const colors = ['rgba(245,242,236,.08)', '#e05a5a', '#e09a30', '#e09a30', '#4caf7d'];
+      const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById('s' + i).style.background =
+          i <= score ? colors[score] : 'rgba(245,242,236,.08)';
+      }
+      const lbl       = document.getElementById('strengthLabel');
+      lbl.textContent = val.length ? labels[score] : '';
+      lbl.style.color = val.length ? colors[score] : 'rgba(245,242,236,.35)';
+    }
+
+    // ── 4. Submit ─────────────────────────────────────────────────
+    async function handleSubmit() {
+      const newPassword     = document.getElementById('newPassword').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+      // Clear previous errors
+      document.getElementById('pwError').textContent      = '';
+      document.getElementById('confirmError').textContent = '';
+      document.getElementById('errorMsg').classList.remove('show');
+      document.getElementById('newPassword').style.borderColor     = '';
+      document.getElementById('confirmPassword').style.borderColor = '';
+
+      // Validate
+      let valid = true;
+      if (newPassword.length < 8) {
+        document.getElementById('pwError').textContent            = 'Password must be at least 8 characters.';
+        document.getElementById('newPassword').style.borderColor  = '#e05a5a';
+        valid = false;
+      }
+      if (newPassword !== confirmPassword) {
+        document.getElementById('confirmError').textContent           = 'Passwords do not match.';
+        document.getElementById('confirmPassword').style.borderColor  = '#e05a5a';
+        valid = false;
+      }
+      if (!valid) return;
+
+      // Loading state
+      const btn     = document.getElementById('submitBtn');
+      const spinner = document.getElementById('spinner');
+      const btnText = document.getElementById('btnText');
+      btn.disabled          = true;
+      spinner.classList.remove('hidden');
+      btnText.style.opacity = '0';
+
+      try {
+        const res  = await fetch('/api/auth/reset-password', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ token, newPassword }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          // Token expired or already used
+          if (res.status === 400) {
+            document.getElementById('formState').style.display    = 'none';
+            document.getElementById('invalidState').style.display = 'block';
+            document.getElementById('backLink').style.display     = 'none';
+            return;
+          }
+          throw new Error(data.error || 'Something went wrong. Please try again.');
+        }
+
+        // Success — show success state, hide back link
+        document.getElementById('formState').style.display    = 'none';
+        document.getElementById('successState').style.display = 'block';
+        document.getElementById('backLink').style.display     = 'none';
+
+      } catch (err) {
+        document.getElementById('errorText').textContent = err.message;
+        document.getElementById('errorMsg').classList.add('show');
+      } finally {
+        btn.disabled          = false;
+        spinner.classList.add('hidden');
+        btnText.style.opacity = '1';
+      }
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
+  

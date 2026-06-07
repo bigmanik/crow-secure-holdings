@@ -58,28 +58,7 @@ export const login = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Server error.' });
   }
-  //logout
-
-  // const accessToken = jwt.sign(
-  //   { id: user._id, role: user.role },
-  //   process.env.JWT_SECRET,
-  //   { expiresIn: '15m' }
-  // );
-
-  // const refreshToken = jwt.sign(
-  //   { id: user._id },
-  //   process.env.REFRESH_TOKEN_SECRET,
-  //   { expiresIn: '7d' }
-  // );
-
-  // // Persist the refresh token
-  // await RefreshToken.create({
-  //   token: refreshToken,
-  //   userId: user._id,
-  //   expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  // });
-
-  // res.json({ accessToken, refreshToken });
+ 
 };
 
 // ─── Forgot Password ─────────────────────────────────────────
@@ -87,76 +66,86 @@ export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
-
-    // Return the same message whether the email exists or not.
-    // This prevents attackers from probing which emails are registered.
-    if (!user) {
-      return res.status(200).json({
-        message: 'If that email is registered, a reset link has been sent.',
-      });
-    }
-
-    // Generate a cryptographically secure random token
+ 
+    // Always return the same message — prevents email enumeration attacks
+    const safeResponse = {
+      message: 'If that email is registered, a reset link has been sent.',
+    };
+ 
+    if (!user) return res.status(200).json(safeResponse);
+ 
+    // ── Generate & persist token ──────────────────────────────────────────
     const resetToken = crypto.randomBytes(32).toString('hex');
-
     user.resetToken = resetToken;
     user.resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
     await user.save();
-
+ 
+    // ── Build reset link ──────────────────────────────────────────────────
     const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
-
-    await sendEmail({
-      to: user.email,
-      subject: 'Reset Your Crow Secure Password',
-      html: `
-        <div style="font-family: sans-serif; max-width: 480px; margin: auto;">
-          <h2>Password Reset Request</h2>
-          <p>We received a request to reset your password.</p>
-          <a href="${resetLink}"
-             style="display:inline-block;padding:12px 24px;background:#000;color:#fff;
-                    text-decoration:none;border-radius:6px;margin:16px 0;">
-            Reset Password
-          </a>
-          <p style="color:#888;font-size:12px;">
-            This link expires in 1 hour. If you didn't request this, ignore this email.
-          </p>
-        </div>
-      `,
-    });
-
-    res.status(200).json({
-      message: 'If that email is registered, a reset link has been sent.',
-    });
+ 
+    // ── Send email — errors are logged but do NOT leak to the client ──────
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: 'Reset Your Crow Secure Password',
+        html: `
+          <div style="font-family:sans-serif;max-width:480px;margin:auto;">
+            <h2 style="margin-bottom:8px;">Password Reset Request</h2>
+            <p>We received a request to reset the password for your Crow Secure Holdings account.</p>
+            <a href="${resetLink}"
+               style="display:inline-block;padding:12px 24px;background:#000;color:#fff;
+                      text-decoration:none;border-radius:6px;margin:16px 0;font-weight:600;">
+              Reset Password
+            </a>
+            <p style="color:#888;font-size:12px;margin-top:24px;">
+              This link expires in <strong>1 hour</strong>.
+              If you didn't request this, you can safely ignore this email.
+            </p>
+          </div>
+        `,
+      });
+    } catch (emailErr) {
+      // Email failed but we've already saved the token — log it and move on.
+      // Returning a 500 here would reveal that the email exists in our system,
+      // which breaks the enumeration-safe pattern above.
+      console.error('⚠️  forgotPassword: email send failed:', emailErr.message);
+    }
+ 
+    return res.status(200).json(safeResponse);
+ 
   } catch (err) {
-    res.status(500).json({ error: 'Server error.' });
+    // Catch unexpected errors (DB failures, etc.) and log the real reason
+    console.error('❌ forgotPassword controller error:', err);
+    return res.status(500).json({ error: 'Server error.' });
   }
 };
-
-// ─── Reset Password ──────────────────────────────────────────
+ 
+// ─── Reset Password ───────────────────────────────────────────────────────────
 export const resetPassword = async (req, res) => {
   try {
     const { token, newPassword } = req.body;
-
-    // Find user whose token matches AND expiry is still in the future
-    // $gt: new Date() means "resetTokenExpiry is greater than right now"
+ 
+    // Find user whose token matches AND hasn't expired yet
     const user = await User.findOne({
       resetToken: token,
       resetTokenExpiry: { $gt: new Date() },
     });
-
+ 
     if (!user) {
       return res.status(400).json({ error: 'Invalid or expired reset token.' });
     }
-
-    // Assign new password — pre('save') hook will hash it automatically
+ 
+    // pre('save') hook will hash the new password automatically
     user.password = newPassword;
-    user.resetToken = null;        // Invalidate token so it can never be reused
+    user.resetToken = null;         // Invalidate — one-time use only
     user.resetTokenExpiry = null;
     await user.save();
-
-    res.status(200).json({ message: 'Password updated successfully.' });
+ 
+    return res.status(200).json({ message: 'Password updated successfully.' });
+ 
   } catch (err) {
-    res.status(500).json({ error: 'Server error.' });
+    console.error('❌ resetPassword controller error:', err);
+    return res.status(500).json({ error: 'Server error.' });
   }
 };
 
