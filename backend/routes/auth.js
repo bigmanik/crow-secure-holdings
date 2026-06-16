@@ -123,8 +123,8 @@ router.post('/login', async (req, res) => {
 // Rules array runs first → validate checks for errors → controller runs only if clean
 router.post('/register',       registerRules,       validate, register);
 router.post('/login',          loginRules,          validate, login);
-router.post('/forgot-password', forgotPasswordRules, validate, forgotPassword);
-router.post('/reset-password',  resetPasswordRules,  validate, resetPassword);
+// router.post('/forgot-password', forgotPasswordRules, validate, forgotPassword);
+// router.post('/reset-password',  resetPasswordRules,  validate, resetPassword);
 
 
 export default router;

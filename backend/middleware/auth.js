@@ -3,8 +3,6 @@ import User from '../models/User.js';
 
 export const protect = async (req, res, next) => {
   try {
-    // Check for token in Authorization header
-    // Frontend sends: Authorization: Bearer <token>
     let token;
     if (req.headers.authorization?.startsWith('Bearer')) {
       token = req.headers.authorization.split(' ')[1];
@@ -17,11 +15,9 @@ export const protect = async (req, res, next) => {
       });
     }
 
-    // Verify the token hasn't been tampered with or expired
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Check user still exists in DB
     const currentUser = await User.findById(decoded.id);
+
     if (!currentUser) {
       return res.status(401).json({
         status: 'fail',
@@ -29,7 +25,6 @@ export const protect = async (req, res, next) => {
       });
     }
 
-    // Attach user to the request object for downstream routes
     req.user = currentUser;
     next();
   } catch (err) {
@@ -38,4 +33,15 @@ export const protect = async (req, res, next) => {
       message: 'Invalid or expired token. Please log in again.',
     });
   }
+};
+
+// ✅ ADD THIS:
+export const adminOnly = (req, res, next) => {
+  if (req.user?.role !== 'admin') {
+    return res.status(403).json({
+      status: 'fail',
+      message: 'Access denied. Admin privileges required.',
+    });
+  }
+  next();
 };

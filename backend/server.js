@@ -22,6 +22,10 @@ app.use(express.json());
 app.use('/api/auth',  authRoutes);
 app.use('/api/user',  verifyToken, userRoutes);
 app.use('/api/admin', verifyToken, requireAdmin, adminRoutes);
+// app.use('/uploads', express.static('uploads'));
+
+// import depositRoutes from './routes/deposit.js';
+// app.use('/api/deposits', depositRoutes);
 
 // Health check
 app.get('/', (req, res) => {

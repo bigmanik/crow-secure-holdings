@@ -405,3 +405,77 @@
     text-align: right;
   }
 }
+
+/* deposit */
+ .accent-line {
+        height: 1px;
+        background: linear-gradient(to right, rgba(180,130,60,0.5), transparent);
+      }
+
+      /* Bronze theme */
+      .theme-bronze .pkg-badge   { color: #ca8a04; background: rgba(120,60,0,0.15); border-color: rgba(161,100,20,0.3); }
+      .theme-bronze .pkg-title   { color: #fff; }
+      .theme-bronze .pkg-accent  { background: linear-gradient(to right, rgba(205,127,50,0.45), transparent); }
+      .theme-bronze .pkg-value   { color: #ca8a04; }
+      .theme-bronze .pkg-dot     { background: #ca8a04; }
+      .theme-bronze .pkg-dotring { background: rgba(120,60,0,0.3); border-color: rgba(161,100,20,0.4); }
+      .theme-bronze .wallet-box  { border-color: rgba(202,138,4,0.3); background: rgba(120,60,0,0.08); }
+      .theme-bronze .copy-btn    { background: rgba(202,138,4,0.15); color: #ca8a04; border-color: rgba(202,138,4,0.3); }
+      .theme-bronze .copy-btn:hover { background: rgba(202,138,4,0.25); }
+      .theme-bronze .submit-btn  { background: linear-gradient(135deg, #92400e, #b45309); }
+      .theme-bronze .submit-btn:hover { background: linear-gradient(135deg, #b45309, #d97706); }
+      .theme-bronze .step-num    { color: #ca8a04; border-color: rgba(202,138,4,0.4); }
+      .theme-bronze .progress-fill { background: #ca8a04; }
+
+      /* Silver theme */
+      .theme-silver .pkg-badge   { color: #94a3b8; background: rgba(71,85,105,0.2); border-color: rgba(100,116,139,0.3); }
+      .theme-silver .pkg-title   { color: #fff; }
+      .theme-silver .pkg-accent  { background: linear-gradient(to right, rgba(148,163,184,0.4), transparent); }
+      .theme-silver .pkg-value   { color: #cbd5e1; }
+      .theme-silver .pkg-dot     { background: #94a3b8; }
+      .theme-silver .pkg-dotring { background: rgba(71,85,105,0.3); border-color: rgba(100,116,139,0.4); }
+      .theme-silver .wallet-box  { border-color: rgba(148,163,184,0.3); background: rgba(71,85,105,0.08); }
+      .theme-silver .copy-btn    { background: rgba(148,163,184,0.15); color: #94a3b8; border-color: rgba(148,163,184,0.3); }
+      .theme-silver .copy-btn:hover { background: rgba(148,163,184,0.25); }
+      .theme-silver .submit-btn  { background: linear-gradient(135deg, #334155, #475569); }
+      .theme-silver .submit-btn:hover { background: linear-gradient(135deg, #475569, #64748b); }
+      .theme-silver .step-num    { color: #94a3b8; border-color: rgba(148,163,184,0.4); }
+      .theme-silver .progress-fill { background: #94a3b8; }
+
+      /* Diamond theme */
+      .theme-diamond .pkg-badge   { color: #c084fc; background: rgba(88,28,135,0.2); border-color: rgba(126,34,206,0.3); }
+      .theme-diamond .pkg-title   { color: #fff; }
+      .theme-diamond .pkg-accent  { background: linear-gradient(to right, rgba(168,85,247,0.5), transparent); }
+      .theme-diamond .pkg-value   { color: #d8b4fe; }
+      .theme-diamond .pkg-dot     { background: #c084fc; }
+      .theme-diamond .pkg-dotring { background: rgba(88,28,135,0.3); border-color: rgba(126,34,206,0.4); }
+      .theme-diamond .wallet-box  { border-color: rgba(192,132,252,0.3); background: rgba(88,28,135,0.08); }
+      .theme-diamond .copy-btn    { background: rgba(192,132,252,0.15); color: #c084fc; border-color: rgba(192,132,252,0.3); }
+      .theme-diamond .copy-btn:hover { background: rgba(192,132,252,0.25); }
+      .theme-diamond .submit-btn  { background: linear-gradient(135deg, #4a1d96, #7c3aed); }
+      .theme-diamond .submit-btn:hover { background: linear-gradient(135deg, #7c3aed, #9333ea); }
+      .theme-diamond .step-num    { color: #c084fc; border-color: rgba(192,132,252,0.4); }
+      .theme-diamond .progress-fill { background: #c084fc; }
+
+      /* Input focus */
+      .deposit-input:focus {
+        outline: none;
+        border-color: rgba(180,130,60,0.5);
+        box-shadow: 0 0 0 2px rgba(180,130,60,0.1);
+      }
+
+      /* File upload styling */
+      .file-label {
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .file-label:hover {
+        border-color: rgba(180,130,60,0.4);
+        background: rgba(180,130,60,0.05);
+      }
+
+      /* Toast */
+      #toast {
+        transition: opacity 0.3s, transform 0.3s;
+      }
+

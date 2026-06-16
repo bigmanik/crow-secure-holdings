@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deposit — Crow Secure Holdings</title>
+    
+  </head>
+  <body class="bg-black text-white" style="font-family:'EB Garamond',serif;">
+
+    <!-- NAVBAR (matches index.html exactly) -->
+    <header class="bg-black text-white flex items-center justify-between px-5 py-2 h-24">
+      <span class="mr-auto">
+        <img src="/src/assets/crow.jpg" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-contain">
+      </span>
+
+      <button id="hamburger" class="md:hidden flex flex-col justify-center items-center gap-1.5 z-50 relative">
+        <span class="block w-6 h-0.5 bg-white"></span>
+        <span class="block w-6 h-0.5 bg-white"></span>
+        <span class="block w-6 h-0.5 bg-white"></span>
+      </button>
+
+      <ul class="hidden md:flex justify-center space-x-10 font-bold text-lg mr-10">
+        <li class="cursor-pointer"><a href="index.html">Home</a></li>
+        <li class="cursor-pointer"><a href="about.html">About</a></li>
+        <li class="cursor-pointer"><a href="index.html#investNow">Invest Now</a></li>
+        <li class="cursor-pointer">Contact</li>
+      </ul>
+
+      <div id="menu-overlay" class="md:hidden fixed inset-0 bg-black/30 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+      <ul id="mobile-menu" class="md:hidden fixed top-0 right-0 h-screen w-3/4 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center gap-8 font-bold text-lg z-50 translate-x-full opacity-0 transition-all duration-300 ease-in-out">
+        <button id="close-btn" class="absolute top-6 right-6 text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <li class="cursor-pointer hover:text-gray-300"><a href="index.html">Home</a></li>
+        <li class="cursor-pointer hover:text-gray-300"><a href="about.html">About</a></li>
+        <li class="cursor-pointer"><a href="index.html#investNow">Invest Now</a></li>
+        <li class="cursor-pointer hover:text-gray-300">Contact</li>
+      </ul>
+    </header>
+
+    <!-- PAGE HERO -->
+    <div class="bg-black border-b border-gray-900 px-6 py-10 text-center">
+      <span class="text-sm uppercase tracking-[0.3em] text-amber-600 font-medium">Secure Your Investment</span>
+      <h1 id="page-title" class="text-3xl md:text-5xl font-bold mt-2 mb-3">Complete Your Deposit</h1>
+      <p class="text-gray-500 text-sm max-w-md mx-auto">Follow the steps below to fund your selected investment package. Your plan activates once payment is confirmed.</p>
+
+      <!-- Breadcrumb -->
+      <div class="flex items-center justify-center gap-2 mt-5 text-xs text-gray-600">
+        <a href="index.html" class="hover:text-amber-600 transition-colors">Home</a>
+        <span>›</span>
+        <a href="index.html#investNow" class="hover:text-amber-600 transition-colors">Packages</a>
+        <span>›</span>
+        <span id="breadcrumb-plan" class="text-amber-600">Deposit</span>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 py-12 md:py-16" id="deposit-container">
+
+      <!-- STEP INDICATOR -->
+      <div class="flex items-center justify-center gap-0 mb-12">
+        <div class="flex flex-col items-center gap-1.5">
+          <div class="step-num w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold">1</div>
+          <span class="text-xs text-gray-500">Package</span>
+        </div>
+        <div class="h-px w-16 bg-gray-800 mb-4"></div>
+        <div class="flex flex-col items-center gap-1.5">
+          <div class="step-num w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold">2</div>
+          <span class="text-xs text-gray-500">Transfer</span>
+        </div>
+        <div class="h-px w-16 bg-gray-800 mb-4"></div>
+        <div class="flex flex-col items-center gap-1.5">
+          <div class="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-xs font-bold text-gray-600">3</div>
+          <span class="text-xs text-gray-600">Confirm</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+
+        <!-- LEFT: Package Summary Card -->
+        <div class="lg:col-span-2">
+          <div id="pkg-card" class="rounded-2xl bg-gray-900 border border-gray-800 p-6 sticky top-6">
+
+            <div class="mb-4">
+              <span id="pkg-badge" class="pkg-badge inline-block text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border mb-3">—</span>
+              <h2 id="pkg-name" class="pkg-title text-xl font-bold tracking-tight">Loading...</h2>
+              <div id="pkg-accent-line" class="pkg-accent h-px w-full mt-2 mb-5"></div>
+            </div>
+
+            <div class="space-y-3 mb-5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 font-medium">Duration</span>
+                <span id="pkg-duration" class="pkg-value text-xs font-semibold">—</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 font-medium">Expected Returns</span>
+                <span id="pkg-profit" class="text-xs font-semibold text-green-400">—</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 font-medium">Minimum Deposit</span>
+                <span id="pkg-min" class="pkg-value text-xs font-semibold">—</span>
+              </div>
+            </div>
+
+            <div class="h-px w-full bg-gray-800/60 mb-4"></div>
+            <p class="text-xs font-bold tracking-widest uppercase text-gray-600 mb-3">Includes</p>
+            <ul id="pkg-features" class="space-y-2.5 text-xs text-gray-400">
+              <!-- filled by JS -->
+            </ul>
+
+            <!-- Change package link -->
+            <div class="mt-6 pt-4 border-t border-gray-800">
+              <a href="index.html#investNow" class="text-xs text-gray-600 hover:text-amber-600 transition-colors flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Choose a different package
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Deposit Steps -->
+        <div class="lg:col-span-3 flex flex-col gap-6">
+
+          <!-- STEP 1: Wallet Address -->
+          <div class="rounded-2xl bg-gray-900 border border-gray-800 p-6">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="step-num w-7 h-7 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0">1</div>
+              <div>
+                <h3 class="text-sm font-bold text-white">Send USDT to this address</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Network: TRC-20 (Tron). Do not send any other coin.</p>
+              </div>
+            </div>
+
+            <div id="wallet-box" class="wallet-box rounded-xl border p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-widest mb-2 font-medium">Company USDT Wallet (TRC-20)</p>
+              <div class="flex items-center gap-3">
+                <code id="wallet-address" class="text-sm text-white font-mono break-all flex-1 leading-relaxed select-all">
+                  Loading...
+                </code>
+                <button id="copy-btn" class="copy-btn flex-shrink-0 border text-xs font-semibold px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5">
+                  <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                  <span id="copy-text">Copy</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-4 flex items-start gap-2.5 bg-yellow-900/10 border border-yellow-900/20 rounded-lg p-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              </svg>
+              <p class="text-xs text-yellow-700 leading-relaxed">Only send <strong class="text-yellow-600">USDT on the TRC-20 network</strong>. Sending any other token or using a different network will result in permanent loss of funds.</p>
+            </div>
+          </div>
+
+          <!-- STEP 2: Submit Proof Form -->
+          <div class="rounded-2xl bg-gray-900 border border-gray-800 p-6">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="step-num w-7 h-7 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0">2</div>
+              <div>
+                <h3 class="text-sm font-bold text-white">Submit proof of payment</h3>
+                <p class="text-xs text-gray-500 mt-0.5">After sending, complete the form below so we can verify your deposit.</p>
+              </div>
+            </div>
+
+            <div id="deposit-form" class="space-y-4">
+
+              <!-- Amount -->
+              <div>
+                <label class="block text-xs text-gray-500 uppercase tracking-widest mb-1.5 font-medium">Amount Sent (USDT)</label>
+                <input
+                  type="number"
+                  id="input-amount"
+                  placeholder="e.g. 12500"
+                  min="0"
+                  class="deposit-input w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 transition-all duration-200"
+                />
+              </div>
+
+              <!-- Tx Hash -->
+              <div>
+                <label class="block text-xs text-gray-500 uppercase tracking-widest mb-1.5 font-medium">Transaction Hash / ID</label>
+                <input
+                  type="text"
+                  id="input-txhash"
+                  placeholder="Paste your transaction hash here"
+                  class="deposit-input w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 font-mono transition-all duration-200"
+                />
+                <p class="text-xs text-gray-600 mt-1.5">Found in your wallet's transaction history after sending.</p>
+              </div>
+
+              <!-- Proof Upload -->
+              <div>
+                <label class="block text-xs text-gray-500 uppercase tracking-widest mb-1.5 font-medium">Screenshot of Transaction</label>
+                <label id="file-label" class="file-label flex flex-col items-center justify-center gap-2 border border-dashed border-gray-700 rounded-xl p-6 text-center transition-all duration-200">
+                  <svg id="upload-icon" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                  </svg>
+                  <span id="file-label-text" class="text-xs text-gray-500">Click to upload screenshot <br/><span class="text-gray-700">JPG, PNG, WEBP — max 5MB</span></span>
+                  <input type="file" id="input-proof" accept="image/jpeg,image/png,image/webp" class="hidden"/>
+                </label>
+                <!-- Preview -->
+                <div id="file-preview" class="hidden mt-3 relative">
+                  <img id="preview-img" src="" alt="proof preview" class="w-full max-h-48 object-contain rounded-lg border border-gray-700"/>
+                  <button id="remove-file" class="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Error message -->
+              <div id="form-error" class="hidden text-xs text-red-400 bg-red-900/10 border border-red-900/20 rounded-lg px-4 py-3"></div>
+
+              <!-- Submit -->
+              <button
+                id="submit-btn"
+                class="submit-btn w-full py-3.5 rounded-xl text-white text-sm font-bold tracking-wide transition-all duration-200 flex items-center justify-center gap-2 mt-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Submit Deposit Proof
+              </button>
+            </div>
+
+            <!-- Success State (hidden initially) -->
+            <div id="success-state" class="hidden text-center py-8">
+              <div class="w-14 h-14 rounded-full bg-green-900/20 border border-green-700/30 flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Proof Received</h3>
+              <p class="text-sm text-gray-400 max-w-xs mx-auto leading-relaxed">Your deposit is under review. Your investment plan will activate within <strong class="text-white">24 hours</strong> once payment is confirmed by our team.</p>
+              <a href="dashboard.html" class="inline-block mt-6 text-xs text-amber-600 hover:text-amber-500 transition-colors border border-amber-900/30 px-5 py-2.5 rounded-full">
+                Go to Dashboard →
+              </a>
+            </div>
+          </div>
+
+          <!-- What happens next -->
+          <div class="rounded-2xl bg-gray-900/50 border border-gray-800/50 p-6">
+            <p class="text-xs font-bold tracking-widest uppercase text-gray-600 mb-4">What Happens Next</p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-green-900/20 border border-green-700/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-white">You submit your proof</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Upload your transaction screenshot and hash above</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-amber-900/20 border border-amber-700/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-white">Admin verifies your payment</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Our team checks the transaction on-chain — usually within a few hours</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-purple-900/20 border border-purple-700/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-white">Your plan activates automatically</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Your investment goes live and you can track it from your dashboard</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast notification -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-gray-800 border border-gray-700 text-white text-xs font-semibold px-5 py-3 rounded-full shadow-xl opacity-0 pointer-events-none flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+      </svg>
+      <span id="toast-msg">Copied!</span>
+    </div>
+
+    <!-- Floating contact buttons (matches index.html) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+      <a href="https://t.me/yourusername" target="_blank" class="flex items-center gap-2 bg-[#229ED9] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-200">
+        <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.26 13.593l-2.948-.924c-.64-.203-.653-.64.136-.954l11.57-4.461c.537-.194 1.006.131.876.967z"/></svg>
+        <span class="text-sm font-semibold hidden sm:inline">Telegram</span>
+      </a>
+      <a href="https://wa.me/2348012345678?text=Hello%2C%20I%20need%20support" target="_blank" class="flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-200">
+        <svg class="w-6 h-6 fill-white" viewBox="0 0 32 32"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.47 2.027 7.774L0 32l8.469-2.001A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.273 19.459c-.398-.199-2.353-1.16-2.718-1.292-.364-.133-.63-.199-.895.2-.265.398-1.028 1.292-1.26 1.558-.232.265-.464.298-.862.1-.398-.199-1.68-.619-3.2-1.976-1.183-1.055-1.981-2.358-2.214-2.757-.232-.398-.025-.614.175-.812.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.132-.265.066-.497-.033-.696-.1-.199-.895-2.159-1.226-2.957-.323-.776-.65-.671-.895-.683l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.36-1.393 3.319s1.426 3.85 1.625 4.116c.199.265 2.806 4.284 6.797 6.009.95.41 1.691.655 2.268.838.952.303 1.82.26 2.505.158.764-.114 2.353-.962 2.685-1.891.332-.929.332-1.726.232-1.891-.099-.166-.364-.265-.762-.464z"/></svg>
+        <span class="text-sm font-semibold hidden sm:inline">WhatsApp</span>
+      </a>
+    </div>
+
+   
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
