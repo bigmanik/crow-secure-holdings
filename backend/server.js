@@ -1,4 +1,5 @@
-import 'dotenv/config'; // ✅ MUST be first — ESM hoists imports so this loads before everything
+
+import 'dotenv/config'; 
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -34,7 +35,7 @@ app.get('/', (req, res) => {
 
 // ── Database + Server ────────────────────────────────────────
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('✅ MongoDB connected successfully');
     app.listen(process.env.PORT, () => {
