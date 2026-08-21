@@ -11,7 +11,10 @@
         account:  resolve(__dirname, 'account.html'),   //
         dashboard: resolve(__dirname, 'dashboard.html'),  // 
         admin:     resolve(__dirname, 'admin.html'), 
-         about:     resolve(__dirname, 'about.html'),      // 
+         about:     resolve(__dirname, 'about.html'),    
+          deposit:     resolve(__dirname, 'deposit.html'),
+           forgotpassword:     resolve(__dirname, 'forgot-password.html'), 
+            resetpassword:     resolve(__dirname, 'reset-password.html'),    // 
       }
     }
   }

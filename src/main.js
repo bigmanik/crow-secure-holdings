@@ -260,65 +260,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const depositContainer = document.getElementById('deposit-container');
 
   if (depositContainer) {
-    const PACKAGES = {
-      bronze: {
-        label: 'Bronze', name: 'Bronze Package', duration: '15 Days',
-        profit: '10% – 15%', min: '$5,000', minRaw: 5000,
-        features: [
-          'Weekly market summary report',
-          'Email support from investment team',
-          'Basic portfolio performance report'
-        ]
-      },
-      silver: {
-        label: 'Silver', name: 'Silver Package', duration: '21 Days',
-        profit: '20% – 25%', min: '$12,500', minRaw: 12500,
-        features: [
-          'Bi-weekly market analysis reports',
-          'Priority email & chat support',
-          'Bi-weekly portfolio performance report'
-        ]
-      },
-      diamond: {
-        label: 'Diamond', name: 'Diamond Package', duration: '30 Days',
-        profit: '30% – 35%', min: '$25,000', minRaw: 25000,
-        features: [
-          'Personalized market analysis reports',
-          'One-on-one consultation with investment expert',
-          'Monthly portfolio performance report'
-        ]
-      }
-    };
-
-    const params  = new URLSearchParams(window.location.search);
-    const planKey = params.get('plan')?.toLowerCase();
-    const plan    = PACKAGES[planKey];
-
-    if (!plan) { window.location.href = '/index.html#investNow'; return; }
-
-    depositContainer.classList.add(`theme-${planKey}`);
-    document.querySelectorAll('.step-num').forEach(el => el.classList.add(`theme-${planKey}`));
-
-    document.getElementById('page-title').textContent       = `${plan.name} — Deposit`;
-    document.getElementById('breadcrumb-plan').textContent  = plan.name;
-    document.getElementById('pkg-badge').textContent        = plan.label;
-    document.getElementById('pkg-name').textContent         = plan.name;
-    document.getElementById('pkg-duration').textContent     = plan.duration;
-    document.getElementById('pkg-profit').textContent       = plan.profit;
-    document.getElementById('pkg-min').textContent          = plan.min;
-
-    const featuresList = document.getElementById('pkg-features');
-    plan.features.forEach(f => {
-      featuresList.innerHTML += `
-        <li class="flex items-start gap-2.5">
-          <span class="mt-0.5 flex-shrink-0 w-3.5 h-3.5 rounded-full pkg-dotring border flex items-center justify-center">
-            <span class="w-1.5 h-1.5 rounded-full pkg-dot"></span>
-          </span>
-          <span class="leading-relaxed">${f}</span>
-        </li>`;
-    });
-
-    const WALLET_ADDRESS = 'YOUR_USDT_TRC20_ADDRESS_HERE';
+    const authToken = localStorage.getItem('crow_token');
+  if (!authToken) {
+    // remember where they were headed so we can send them back after login
+    sessionStorage.setItem('crow_redirect_after_login', window.location.href);
+    window.location.href = '/index.html#login';
+    return;
+  }
+   
+    const WALLET_ADDRESS = 'bc1qchyl0k9muzzlnmcfcm8jdw3dj2ttdpsrem2p4k';
     document.getElementById('wallet-address').textContent = WALLET_ADDRESS;
 
     document.getElementById('copy-btn').addEventListener('click', () => {
@@ -330,17 +280,46 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    document.getElementById('input-proof').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        document.getElementById('preview-img').src = ev.target.result;
-        document.getElementById('file-preview').classList.remove('hidden');
-        document.getElementById('file-label').classList.add('hidden');
-      };
-      reader.readAsDataURL(file);
-    });
+   
+document.getElementById('input-proof').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  // Block oversized files
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
+  if (file.size > MAX_FILE_SIZE) {
+    showDepositError('Screenshot must be under 5MB.');
+    e.target.value = '';
+    return;
+  }
+  
+  // Block wrong file types (HTML accept is bypassable)
+  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    showDepositError('Only JPG, PNG, or WEBP images are allowed.');
+    e.target.value = '';
+    return;
+  }
+  
+  // ... proceed with FileReader
+   const reader = new FileReader();
+
+  reader.onload = (event) => {
+    document.getElementById('preview-img').src = event.target.result;
+    document.getElementById('file-preview').classList.remove('hidden');
+    document.getElementById('file-label').classList.add('hidden');
+  };
+
+  reader.onerror = () => {
+    showDepositError('Could not read that file. Try a different image.');
+    e.target.value = '';
+  };
+
+  reader.readAsDataURL(file);
+});
+
+
+
 
     document.getElementById('remove-file').addEventListener('click', () => {
       document.getElementById('input-proof').value = '';
@@ -351,7 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('submit-btn').addEventListener('click', async () => {
       const amount  = document.getElementById('input-amount').value.trim();
-      const txHash  = document.getElementById('input-txhash').value.trim();
       const proof   = document.getElementById('input-proof').files[0];
       const errorEl = document.getElementById('form-error');
 
@@ -359,17 +337,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!amount || isNaN(amount) || Number(amount) <= 0)
         return showDepositError('Please enter the amount you sent.');
-      if (Number(amount) < plan.minRaw)
-        return showDepositError(`Minimum deposit for the ${plan.name} is ${plan.min}.`);
-      if (!txHash)
-        return showDepositError('Please paste your transaction hash.');
+   
       if (!proof)
         return showDepositError('Please upload a screenshot of your transaction.');
 
       const formData = new FormData();
       formData.append('package', planKey);
       formData.append('amount', amount);
-      formData.append('txHash', txHash);
       formData.append('proofImage', proof);
 
       const btn = document.getElementById('submit-btn');
@@ -377,7 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.innerHTML = `<svg class="w-4 h-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg> Submitting...`;
 
       try {
-        const authToken = localStorage.getItem('token');
+        // const authToken = localStorage.getItem('token');
+          const authToken = localStorage.getItem('crow_token');
         const res = await fetch('http://localhost:5000/api/deposits/submit', {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${authToken}` },
@@ -390,11 +365,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('success-state').classList.remove('hidden');
         showDepositToast('Deposit submitted successfully!');
 
-      } catch (err) {
-        showDepositError(err.message);
-        btn.disabled = false;
-        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Submit Deposit Proof`;
       }
+      
+
+       catch (err) {
+  if (err.name === 'AbortError') return;  // User cancelled — no error
+  
+  if (err.name === 'TypeError' && err.message.includes('fetch')) {
+    // Offline, DNS failure, CORS blocked
+    showDepositError('Network error. Check your connection.');
+  } else {
+    // Server returned 4xx/5xx or validation error
+    showDepositError(err.message);
+  }
+  
+  btn.disabled = false;
+  btn.innerHTML = originalBtnHTML;
+}
     });
 
     function showDepositError(msg) {
@@ -404,13 +391,27 @@ document.addEventListener('DOMContentLoaded', () => {
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function showDepositToast(msg) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-msg').textContent = msg;
-      toast.style.opacity   = '1';
-      toast.style.transform = 'translateX(-50%) translateY(0)';
-      setTimeout(() => { toast.style.opacity = '0'; }, 2500);
-    }
+  
+     let toastTimeoutId = null;  // Track active timeout
+
+function showDepositToast(msg) {
+  const toast = document.getElementById('toast');
+  
+  // Clear previous timeout to prevent overlap
+  if (toastTimeoutId) clearTimeout(toastTimeoutId);
+  
+  document.getElementById('toast-msg').textContent = msg;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';  // Slide up
+  
+  toastTimeoutId = setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(20px)';  // Reset!
+    toastTimeoutId = null;
+  }, 2500);
+}
+     
+
   }
 
 }); // end DOMContentLoaded
